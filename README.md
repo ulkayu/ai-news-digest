@@ -7,6 +7,6 @@ GitHub Pages. Every file in it is written by `npm run deploy` in the `ai-news`
 project, which renders `data/digests/latest.json` into `index.html` and pushes the
 result as a single commit.
 
-The page is republished twice a day, at **05:00 and 15:00 Europe/Warsaw**. Each
+The page is republished twice a day, at **11:00 and 15:00 Europe/Warsaw**. Each
 commit message names the slot, the item count and the digest's `generatedAt`, so
 the commit log doubles as the publish log.
