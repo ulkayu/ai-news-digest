@@ -3,9 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AI News Digest — updated Mon, Aug 24, 2026 at 17:01 GMT+2</title>
+<title>AI News Digest — updated Mon, Aug 24, 2026 at 17:22 GMT+2</title>
 <meta name="description" content="The top 10 AI stories, tools and model releases. Refreshed twice a day.">
 <meta name="color-scheme" content="light dark">
+<meta name="ai-news-freshness" content="2026-08-24-1500|published|current|0">
+
 <style>
 :root {
   --bg: #fbfaf8;
@@ -16,6 +18,12 @@
   --line: #e6e4df;
   --accent: #b4530a;
   --tag-bg: #f1efea;
+  --warn-bg: #fdf4e3;
+  --warn-line: #e6c98a;
+  --warn-ink: #7a4c05;
+  --stale-bg: #fdeceb;
+  --stale-line: #e3a9a4;
+  --stale-ink: #8f2a20;
   --max: 42rem;
   --wide: 62rem;
 }
@@ -29,6 +37,12 @@
     --line: #2a2b30;
     --accent: #f0a06a;
     --tag-bg: #232429;
+    --warn-bg: #2b2413;
+    --warn-line: #6b5620;
+    --warn-ink: #f0cd8a;
+    --stale-bg: #2f1917;
+    --stale-line: #7a3a33;
+    --stale-ink: #f2a99f;
   }
 }
 * { box-sizing: border-box; }
@@ -66,6 +80,38 @@ h1 {
   color: var(--accent);
 }
 .updated .slot { color: var(--ink-faint); }
+/* The relative age is filled in by the browser, because a static file cannot
+   keep "2 hours ago" true. Empty until then — the absolute stamp beside it is
+   already the answer for a reader with no JavaScript. */
+.updated .age {
+  font-size: 0.75rem;
+  color: var(--ink-faint);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.05rem 0.45rem;
+}
+.updated .age:empty { display: none; }
+
+/* The freshness notice. Deliberately at the top, before the stories: a reader
+   who does not scroll still learns that what follows may not be current. */
+.notice {
+  margin: 1rem 0 0;
+  padding: 0.8rem 0.95rem;
+  border: 1px solid var(--warn-line);
+  border-left-width: 3px;
+  border-radius: 8px;
+  background: var(--warn-bg);
+  color: var(--warn-ink);
+}
+.notice[hidden] { display: none; }
+.notice-stale { border-color: var(--stale-line); background: var(--stale-bg); color: var(--stale-ink); }
+.notice-head {
+  margin: 0 0 0.2rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.notice-body { margin: 0; font-size: 0.8125rem; line-height: 1.5; }
 ol.items { list-style: none; margin: 0; padding: 0; }
 .item {
   display: grid;
@@ -150,6 +196,10 @@ ol.cos { list-style: none; margin: 0; padding: 0; }
 .co-none { margin: 0; font-size: 0.8125rem; color: var(--ink-faint); font-style: italic; }
 footer { margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid var(--line); color: var(--ink-faint); font-size: 0.8125rem; }
 footer p { margin: 0 0 0.35rem; }
+.src-health { margin: 0 0 0.35rem; }
+.src-bad { color: var(--stale-ink); }
+.status-link { color: var(--ink-soft); text-decoration: none; border-bottom: 1px solid var(--line); }
+.status-link:hover, .status-link:focus-visible { color: var(--accent); border-color: var(--accent); }
 a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
 @media (min-width: 40rem) {
   body { padding: 3rem 2rem 5rem; }
@@ -177,18 +227,70 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
   <header>
     <h1>AI News Digest</h1>
     <p class="tagline">The top 10 AI stories, tools and model releases. Refreshed twice a day.</p>
-    <p class="updated">
+    <p class="updated"
+       data-freshness
+       data-generated-at="2026-08-24T15:22:40Z"
+       data-slot="15:00"
+       data-overdue="0"
+       data-boundaries="2026-08-25T03:00:00.000Z,2026-08-25T13:00:00.000Z,2026-08-26T03:00:00.000Z,2026-08-26T13:00:00.000Z,2026-08-27T03:00:00.000Z,2026-08-27T13:00:00.000Z,2026-08-28T03:00:00.000Z,2026-08-28T13:00:00.000Z,2026-08-29T03:00:00.000Z,2026-08-29T13:00:00.000Z,2026-08-30T03:00:00.000Z,2026-08-30T13:00:00.000Z,2026-08-31T03:00:00.000Z,2026-08-31T13:00:00.000Z,2026-09-01T03:00:00.000Z,2026-09-01T13:00:00.000Z">
       <span class="label">Last updated</span>
-      <time datetime="2026-08-24T15:01:21Z">Mon, Aug 24, 2026 at 17:01 GMT+2</time>
+      <time datetime="2026-08-24T15:22:40Z">Mon, Aug 24, 2026 at 17:22 GMT+2</time>
       <span class="slot">(15:00 run)</span>
+      <span class="age" data-age></span>
     </p>
   </header>
+    <div class="notice" data-notice hidden></div>
   <div class="layout">
     <main>
       <h2 class="col-title">The stories</h2>
       <ol class="items">
       <li class="item">
         <span class="rank" aria-hidden="true">1</span>
+        <div class="body">
+          <h3 class="title"><a href="https://blogs.nvidia.com/blog/vera-rubin-nvl72-efficiency-ai-agents" rel="noopener noreferrer">Up to 30x More Work Per Watt: NVIDIA Vera Rubin NVL72 Sets a New Efficiency Standard for AI Agents</a></h3>
+          <p class="byline">
+            <span class="source">NVIDIA</span>
+            <span class="sep" aria-hidden="true">·</span>
+            <time datetime="2026-08-24T15:00:19Z">Aug 24</time>
+            <span class="sep" aria-hidden="true">·</span>
+            <span class="host">blogs.nvidia.com</span>
+          </p>
+          <p class="summary">According to OpenRouter data, agentic AI workloads consume 15x more tokens than a simple chat request. Why?</p>
+          <ul class="tags"><li class="tag">news</li><li class="tag">vendor</li></ul>
+        </div>
+      </li>
+      <li class="item">
+        <span class="rank" aria-hidden="true">2</span>
+        <div class="body">
+          <h3 class="title"><a href="https://blogs.nvidia.com/blog/vera-rubin-lpx-spectrum-x-nvlink-fusion" rel="noopener noreferrer">With Groq 3 LPX in Full Production, NVIDIA Extends Vera Rubin Inference for Agents</a></h3>
+          <p class="byline">
+            <span class="source">NVIDIA</span>
+            <span class="sep" aria-hidden="true">·</span>
+            <time datetime="2026-08-24T15:00:41Z">Aug 24</time>
+            <span class="sep" aria-hidden="true">·</span>
+            <span class="host">blogs.nvidia.com</span>
+          </p>
+          <p class="summary">The next era of AI inference won’t be defined by a single breakthrough chip, network or system. It’ll be defined by how every layer of the AI factory works together.</p>
+          <ul class="tags"><li class="tag">news</li><li class="tag">vendor</li></ul>
+        </div>
+      </li>
+      <li class="item">
+        <span class="rank" aria-hidden="true">3</span>
+        <div class="body">
+          <h3 class="title"><a href="https://techcrunch.com/2026/08/24/openai-is-building-an-ai-agent-for-everything-will-everyone-use-them" rel="noopener noreferrer">OpenAI is building AI agents for everything. Will everyone use them?</a></h3>
+          <p class="byline">
+            <span class="source">TechCrunch</span>
+            <span class="sep" aria-hidden="true">·</span>
+            <time datetime="2026-08-24T15:00:00Z">Aug 24</time>
+            <span class="sep" aria-hidden="true">·</span>
+            <span class="host">techcrunch.com</span>
+          </p>
+          <p class="summary">Inside the frontier lab’s push to bring AI agents from software engineers to the masses.</p>
+          <ul class="tags"><li class="tag">opinion</li></ul>
+        </div>
+      </li>
+      <li class="item">
+        <span class="rank" aria-hidden="true">4</span>
         <div class="body">
           <h3 class="title"><a href="https://techcrunch.com/2026/08/24/hugging-face-reportedly-in-talks-to-be-acquired-for-13b" rel="noopener noreferrer">Hugging Face reportedly in talks to be acquired for $13B</a></h3>
           <p class="byline">
@@ -203,7 +305,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
         </div>
       </li>
       <li class="item">
-        <span class="rank" aria-hidden="true">2</span>
+        <span class="rank" aria-hidden="true">5</span>
         <div class="body">
           <h3 class="title"><a href="https://wired.com/story/teachers-deepfake-ai-students-content" rel="noopener noreferrer">They Dedicated Their Lives to Teaching. Then the Deepfakes Started</a></h3>
           <p class="byline">
@@ -218,7 +320,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
         </div>
       </li>
       <li class="item">
-        <span class="rank" aria-hidden="true">3</span>
+        <span class="rank" aria-hidden="true">6</span>
         <div class="body">
           <h3 class="title"><a href="https://importai.substack.com/p/import-ai-470-no-rights-for-machines" rel="noopener noreferrer">Import AI 470: No rights for machines; automating environment generation with SPADE; and building better GPU kernels with Hawkeye</a></h3>
           <p class="byline">
@@ -233,7 +335,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
         </div>
       </li>
       <li class="item">
-        <span class="rank" aria-hidden="true">4</span>
+        <span class="rank" aria-hidden="true">7</span>
         <div class="body">
           <h3 class="title"><a href="https://technologyreview.com/2026/08/24/1141740/kids-machines-language-learning" rel="noopener noreferrer">Kids outlearn AI—and we still don’t know why</a></h3>
           <p class="byline">
@@ -248,7 +350,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
         </div>
       </li>
       <li class="item">
-        <span class="rank" aria-hidden="true">5</span>
+        <span class="rank" aria-hidden="true">8</span>
         <div class="body">
           <h3 class="title"><a href="https://zdnet.com/article/googlebook-laptop-is-almost-here-can-it-avoid-copilot-pc-problem" rel="noopener noreferrer">Google&#39;s AI-first Googlebook laptop is almost here - can it avoid the Copilot+ PC problem?</a></h3>
           <p class="byline">
@@ -263,7 +365,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
         </div>
       </li>
       <li class="item">
-        <span class="rank" aria-hidden="true">6</span>
+        <span class="rank" aria-hidden="true">9</span>
         <div class="body">
           <h3 class="title"><a href="https://zdnet.com/article/how-to-use-chatgpt-work-and-my-top-tips" rel="noopener noreferrer">How to use ChatGPT Work - and my top 10 tips for getting started with agentic AI</a></h3>
           <p class="byline">
@@ -278,37 +380,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
         </div>
       </li>
       <li class="item">
-        <span class="rank" aria-hidden="true">7</span>
-        <div class="body">
-          <h3 class="title"><a href="https://spectrum.ieee.org/adaptable-engineer-core-skills" rel="noopener noreferrer">What It Takes to Be an Adaptable Engineer</a></h3>
-          <p class="byline">
-            <span class="source">IEEE Spectrum</span>
-            <span class="sep" aria-hidden="true">·</span>
-            <time datetime="2026-08-24T14:00:01Z">Aug 24</time>
-            <span class="sep" aria-hidden="true">·</span>
-            <span class="host">spectrum.ieee.org</span>
-          </p>
-          <p class="summary">The AI boom has disrupted the way engineers work, introducing new tools to learn, raising expectations for what teams can achieve in a workday, and making it harder to get hired in the first place.</p>
-          <ul class="tags"><li class="tag">opinion</li></ul>
-        </div>
-      </li>
-      <li class="item">
-        <span class="rank" aria-hidden="true">8</span>
-        <div class="body">
-          <h3 class="title"><a href="https://techcrunch.com/2026/08/22/inherent-founded-by-deepmind-alumni-says-its-ai-teammate-just-outperformed-anthropic-and-openai-at-replicating-research" rel="noopener noreferrer">Inherent, founded by DeepMind alumni, says its AI ‘teammate’ just outperformed Anthropic and OpenAI at replicating research</a></h3>
-          <p class="byline">
-            <span class="source">TechCrunch</span>
-            <span class="sep" aria-hidden="true">·</span>
-            <time datetime="2026-08-22T19:00:00Z">Aug 22</time>
-            <span class="sep" aria-hidden="true">·</span>
-            <span class="host">techcrunch.com</span>
-          </p>
-          <p class="summary">Built by DeepMind alumni, British AI lab Inherent released Faraday, an AI agent whose ability to replicate scientific papers could be a stepping stone for innovation.</p>
-          <ul class="tags"><li class="tag">capability</li></ul>
-        </div>
-      </li>
-      <li class="item">
-        <span class="rank" aria-hidden="true">9</span>
+        <span class="rank" aria-hidden="true">10</span>
         <div class="body">
           <h3 class="title"><a href="https://arxiv.org/abs/2608.20342" rel="noopener noreferrer">PrimeAgentOrchestrator: Memory-Primed Agent Spawning for Personal AI Infrastructure</a></h3>
           <p class="byline">
@@ -319,21 +391,6 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
             <span class="host">arxiv.org</span>
           </p>
           <p class="summary">Large language model (LLM) coding agents start each session with an empty context window, discarding accumulated knowledge from prior work.</p>
-          <ul class="tags"><li class="tag">research</li></ul>
-        </div>
-      </li>
-      <li class="item">
-        <span class="rank" aria-hidden="true">10</span>
-        <div class="body">
-          <h3 class="title"><a href="https://arxiv.org/abs/2608.20549" rel="noopener noreferrer">Volumetric Radiology AI in the Era of Multimodal Large Language Models</a></h3>
-          <p class="byline">
-            <span class="source">arXiv cs.AI</span>
-            <span class="sep" aria-hidden="true">·</span>
-            <time datetime="2026-08-24T04:00:00Z">Aug 24</time>
-            <span class="sep" aria-hidden="true">·</span>
-            <span class="host">arxiv.org</span>
-          </p>
-          <p class="summary">Advances in multimodal large language models (MLLMs) are extending radiological artificial intelligence (AI) beyond task-specific image analysis toward multimodal understanding and reasoning.</p>
           <ul class="tags"><li class="tag">research</li></ul>
         </div>
       </li>
@@ -395,11 +452,11 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
         </li>
         <li class="co">
           <p class="co-name"><a href="https://blogs.nvidia.com/" rel="noopener noreferrer">NVIDIA</a><span class="co-kind">Platform</span></p>
-          <p class="co-title"><a href="https://techcrunch.com/2026/08/21/nvidia-partners-with-data-center-developer-cloverleaf" rel="noopener noreferrer">Nvidia partners with data center developer Cloverleaf</a></p>
+          <p class="co-title"><a href="https://blogs.nvidia.com/blog/nvlink-fusion-xpu-ai-factory" rel="noopener noreferrer">How XPUs Meet a World-Class AI Factory</a></p>
           <p class="co-meta">
-            <span class="co-src" title="Reported by another outlet, not announced by the company">via TechCrunch</span>
+            <span class="co-src" title="From the company itself">NVIDIA</span>
             <span class="sep" aria-hidden="true">·</span>
-            <time datetime="2026-08-21T22:37:38Z" title="Aug 22">3 days ago</time>
+            <time datetime="2026-08-24T15:00:54Z" title="Aug 24">just now</time>
             
           </p>
         </li>
@@ -413,14 +470,14 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
             
           </p>
         </li>
-        <li class="co co-stale">
+        <li class="co">
           <p class="co-name"><a href="https://mistral.ai/news" rel="noopener noreferrer">Mistral AI</a><span class="co-kind">Lab</span></p>
-          <p class="co-title"><a href="https://mistral.ai/news/shieldstral" rel="noopener noreferrer">Introducing Shieldstral.</a></p>
+          <p class="co-title"><a href="https://mistral.ai/news/agentic-search" rel="noopener noreferrer">Agentic Search. More accurate and efficient results from your AI systems.</a></p>
           <p class="co-meta">
             <span class="co-src" title="From the company itself">Mistral AI</span>
             <span class="sep" aria-hidden="true">·</span>
-            <time datetime="2026-08-04T12:00:26Z" title="Aug 4">20 days ago</time>
-            <span class="co-flag">last known</span>
+            <time datetime="2026-08-20T12:00:17Z" title="Aug 20">4 days ago</time>
+            
           </p>
         </li>
         <li class="co">
@@ -439,7 +496,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
           <p class="co-meta">
             <span class="co-src" title="Reported by another outlet, not announced by the company">via TechCrunch</span>
             <span class="sep" aria-hidden="true">·</span>
-            <time datetime="2026-08-24T13:47:26Z" title="Aug 24">1h ago</time>
+            <time datetime="2026-08-24T13:47:26Z" title="Aug 24">2h ago</time>
             
           </p>
         </li>
@@ -448,8 +505,52 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
   </div>
   <footer>
     <p>10 items in this digest, 10 companies tracked. Published daily at 05:00 and 15:00 Europe/Warsaw.</p>
-    <p>Selected 10 of 71 candidates from 198 items across 29 live sources; 2 near-duplicate(s) collapsed; rubric v1 (2026-08-24). 1 of 10 companies had no signal in this run and shows its last known item.</p>
+    <p class="src-health">29 of 30 sources OK · 5 quiet for over a fortnight</p>
+    <p>Selected 10 of 74 candidates from 201 items across 29 live sources; 2 near-duplicate(s) collapsed; rubric v1 (2026-08-24).</p>
+    <p><a class="status-link" href="status.html">Run log and source health →</a></p>
   </footer>
 </div>
+<script>
+(function () {
+  var root = document.querySelector("[data-freshness]");
+  if (!root) return;
+  var generatedAt = Date.parse(root.getAttribute("data-generated-at"));
+  var slotLabel = root.getAttribute("data-slot") || "";
+  var baked = parseInt(root.getAttribute("data-overdue") || "0", 10);
+  var boundaries = (root.getAttribute("data-boundaries") || "").split(",").filter(Boolean);
+  var now = Date.now();
+  if (!generatedAt || now < generatedAt) return;
+
+  var hours = (now - generatedAt) / 36e5;
+  var age = hours < 1 ? "just now"
+    : hours < 2 ? "1 hour ago"
+    : hours < 36 ? Math.round(hours) + " hours ago"
+    : Math.round(hours / 24) === 1 ? "1 day ago"
+    : Math.round(hours / 24) + " days ago";
+  var el = document.querySelector("[data-age]");
+  if (el) el.textContent = age;
+
+  var overdue = 0;
+  for (var i = 0; i < boundaries.length; i += 1) {
+    if (Date.parse(boundaries[i]) <= now) overdue += 1;
+  }
+  if (overdue <= baked) return;
+
+  var notice = document.querySelector("[data-notice]");
+  if (!notice) return;
+  notice.hidden = false;
+  notice.className = "notice notice-stale";
+  notice.setAttribute("role", "status");
+  var head = overdue === 1
+    ? "Behind schedule — one update has not landed"
+    : "Behind schedule — " + overdue + " updates have not landed";
+  var body = "You are reading the " + slotLabel + " digest, " + age +
+    ". The page is served from a cache, so this may also mean you are holding an old copy — reload to check.";
+  notice.innerHTML = "";
+  var h = document.createElement("p"); h.className = "notice-head"; h.textContent = head;
+  var b = document.createElement("p"); b.className = "notice-body"; b.textContent = body;
+  notice.appendChild(h); notice.appendChild(b);
+})();
+</script>
 </body>
 </html>

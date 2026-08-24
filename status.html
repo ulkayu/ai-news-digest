@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI News Digest — status</title>
+<meta name="robots" content="noindex">
+<meta name="color-scheme" content="light dark">
+<style>
+:root {
+  --bg: #fbfaf8; --surface: #ffffff; --ink: #17171a; --ink-soft: #5c5c66;
+  --ink-faint: #8a8a95; --line: #e6e4df; --accent: #b4530a; --tag-bg: #f1efea;
+  --ok: #1f6b3a; --bad: #a32b1e; --warn: #8a5c05;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #121214; --surface: #191a1d; --ink: #f2f1ee; --ink-soft: #a9a8b0;
+    --ink-faint: #7c7b84; --line: #2a2b30; --accent: #f0a06a; --tag-bg: #232429;
+    --ok: #6fcf90; --bad: #f0918a; --warn: #e8bd6b;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font: 400 1rem/1.55 ui-sans-serif, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  padding: 1.5rem 1.125rem 4rem;
+}
+.wrap { max-width: 62rem; margin: 0 auto; }
+header { border-bottom: 1px solid var(--line); padding-bottom: 1.1rem; }
+h1 { font-size: clamp(1.35rem, 5vw, 1.75rem); margin: 0 0 0.35rem; letter-spacing: -0.02em; }
+.state { margin: 0 0 0.3rem; font-size: 0.9375rem; font-weight: 600; }
+.state-current { color: var(--ok); }
+.state-degraded { color: var(--warn); }
+.state-stale { color: var(--bad); }
+.sub { margin: 0; color: var(--ink-faint); font-size: 0.8125rem; }
+h2 {
+  font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase;
+  color: var(--ink-faint); margin: 2rem 0 0.6rem;
+}
+table { width: 100%; border-collapse: collapse; font-size: 0.8125rem; }
+th {
+  text-align: left; font-size: 0.625rem; letter-spacing: 0.07em; text-transform: uppercase;
+  color: var(--ink-faint); font-weight: 600; padding: 0 0.5rem 0.35rem 0; border-bottom: 1px solid var(--line);
+}
+td { padding: 0.5rem 0.5rem 0.5rem 0; border-bottom: 1px solid var(--line); vertical-align: top; color: var(--ink-soft); }
+td:first-child, th:first-child { padding-left: 0; }
+.mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.75rem; color: var(--ink); }
+.small { font-size: 0.6875rem; color: var(--ink-faint); }
+.num { text-align: right; font-variant-numeric: tabular-nums; }
+.pill {
+  display: inline-block; font-size: 0.625rem; letter-spacing: 0.05em; text-transform: uppercase;
+  font-weight: 600; border-radius: 3px; padding: 0.1rem 0.36rem; white-space: nowrap;
+}
+.pill-published { color: var(--ok); border: 1px solid currentColor; }
+.pill-held, .pill-skipped, .pill-dry-run { color: var(--warn); border: 1px solid currentColor; }
+.pill-failed { color: var(--bad); border: 1px solid currentColor; }
+.tag { font-size: 0.625rem; color: var(--ink-faint); border: 1px solid var(--line); border-radius: 3px; padding: 0 0.25rem; }
+.ok { color: var(--ok); font-size: 0.8125rem; margin: 0; }
+.cards { display: grid; gap: 0.75rem; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); margin: 1.1rem 0 0; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 0.7rem 0.8rem; }
+.card dt { font-size: 0.625rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--ink-faint); }
+.card dd { margin: 0.2rem 0 0; font-size: 0.9375rem; font-weight: 600; letter-spacing: -0.01em; }
+.card dd .unit { font-weight: 400; font-size: 0.75rem; color: var(--ink-faint); }
+footer { margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid var(--line); color: var(--ink-faint); font-size: 0.8125rem; }
+a { color: var(--accent); }
+@media (min-width: 40rem) { body { padding: 3rem 2rem 5rem; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Status</h1>
+    <p class="state state-current">Current</p>
+    <p class="sub">Computed Aug 24, 17:22 Europe/Warsaw. Publishes at 05:00 and 15:00; this file is rewritten by every publish attempt.</p>
+    <dl class="cards">
+      <div class="card"><dt>Live digest</dt><dd>15:00 <span class="unit">2026-08-24-1500</span></dd></div>
+      <div class="card"><dt>Items</dt><dd>10</dd></div>
+      <div class="card"><dt>Age</dt><dd>0.0 <span class="unit">hours</span></dd></div>
+      <div class="card"><dt>Slots behind</dt><dd>0</dd></div>
+      <div class="card"><dt>Sources OK</dt><dd>29 <span class="unit">of 30</span></dd></div>
+      <div class="card"><dt>Last attempt</dt><dd>published</dd></div>
+    </dl>
+  </header>
+
+  <h2>Missed slots</h2>
+    <p class="ok">Every scheduled slot in the last two weeks published at least once.</p>
+
+  <h2>Publish attempts</h2>
+  <table>
+    <thead><tr><th>slot</th><th>outcome</th><th>started</th><th class="num">took</th><th>stages</th><th>detail</th></tr></thead>
+    <tbody>
+      <tr class="o-published">
+        <td class="mono">2026-08-24-1500</td>
+        <td><span class="pill pill-published">published</span></td>
+        <td class="mono">Aug 24, 17:22</td>
+        <td class="mono num">4s</td>
+        <td class="mono small">ingest → digest</td>
+        <td>10 items <span class="tag">repeat</span></td>
+      </tr>
+      <tr class="o-skipped">
+        <td class="mono">2026-08-24-1500</td>
+        <td><span class="pill pill-skipped">stood down</span></td>
+        <td class="mono">Aug 24, 17:04</td>
+        <td class="mono num">0s</td>
+        <td class="mono small">—</td>
+        <td>another publish is already running: pid 19337 has been publishing 2026-08-24-0500 for 0s <span class="tag">repeat</span></td>
+      </tr>
+      <tr class="o-published">
+        <td class="mono">2026-08-24-1500</td>
+        <td><span class="pill pill-published">published</span></td>
+        <td class="mono">Aug 24, 17:01</td>
+        <td class="mono num">79s</td>
+        <td class="mono small">ingest → digest → build → deploy</td>
+        <td>10 items <span class="tag">repeat</span></td>
+      </tr>
+      <tr class="o-failed">
+        <td class="mono">2026-08-24-1500</td>
+        <td><span class="pill pill-failed">FAILED</span></td>
+        <td class="mono">Aug 24, 17:01</td>
+        <td class="mono num">6s</td>
+        <td class="mono small">ingest → digest → build → deploy ✗</td>
+        <td>deploy failed: PATCH /repos/ulkayu/ai-news-digest/git/refs/heads/main -&gt; 422 Unprocessable Entity: {&quot;message&quot;:&quot;Update is not a fast forward&quot;,&quot;documentation_url&quot; <span class="tag">repeat</span></td>
+      </tr>
+      <tr class="o-published">
+        <td class="mono">2026-08-24-1500</td>
+        <td><span class="pill pill-published">published</span></td>
+        <td class="mono">Aug 24, 17:01</td>
+        <td class="mono num">49s</td>
+        <td class="mono small">ingest → digest → build → deploy</td>
+        <td>10 items <span class="tag">repeat</span></td>
+      </tr>
+      <tr class="o-published">
+        <td class="mono">2026-08-24-1500</td>
+        <td><span class="pill pill-published">published</span></td>
+        <td class="mono">Aug 24, 16:56</td>
+        <td class="mono num">33s</td>
+        <td class="mono small">ingest → digest → build → deploy</td>
+        <td>10 items</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Sources</h2>
+    <table>
+      <thead><tr><th>source</th><th>id</th><th>state</th><th>detail</th></tr></thead>
+      <tbody>
+      <tr class="s-skipped">
+        <td>Anthropic</td>
+        <td class="mono small">anthropic</td>
+        <td><span class="pill pill-skipped">skipped</span></td>
+        <td>disabled — BLOCKED — no public feed. Checked /rss.xml, /feed.xml, /index.xml, /news/rss.xml, /news/feed.xml, /engineering/rss.xml (all 404) and the news page exposes no &lt;link rel=alternate&gt;. </td>
+      </tr>
+      <tr class="s-ok">
+        <td>Apple Machine Learning Research</td>
+        <td class="mono small">apple-ml</td>
+        <td><span class="pill pill-published">ok</span></td>
+        <td>last item this run</td>
+      </tr>
+      <tr class="s-ok">
+        <td>Ars Technica</td>
+        <td class="mono small">ars-technica-ai</td>
+        <td><span class="pill pill-published">ok</span></td>
+        <td>last item this run</td>
+      </tr>
+      <tr class="s-ok">
+        <td>arXiv cs.AI</td>
+        <td class="mono small">arxiv-cs-ai</td>
+        <td><span class="pill pill-published">ok</span></td>
+        <td>last item this run</td>
+      </tr>
+      <tr class="s-ok">
+        <td>AWS Machine Learning</td>
+        <td class="mono small">aws-ml</td>
+        <td><span class="pill pill-published">ok</span></td>
+        <td>last item this run</td>
+      </tr>
+      <tr class="s-ok">
+        <td>Berkeley AI Research</td>
+        <td class="mono small">bair</td>
+        <td><span class="pill pill-published">ok</span></td>
+        <td>has never produced a usable item</td>
+      </tr>
+      <tr class="s-ok">
+        <td>Cloudflare</td>
+        <td class="mono small">cloudflare-ai</td>
+        <td><span class="pill pill-published">ok</span></td>
+        <td>has never produced a usable item</td>
+      </tr>
+      <tr class="s-ok">
+        <td>Google</td>
+        <td class="mono small">google-keyword-ai</td>
+        <td><span class="pill pill-published">ok</span></td>
+        <td>last item this run</td>
+      </tr>
+      <tr class="s-ok">
+        <td>Google DeepMind</td>
+        <td class="mono small">google-deepmind</td>
+        <td><span class="pill pill-published">ok</span></td>
+        <td>last item this run</td>
+      </tr>
+      <tr class="s-ok">
+        <td>Google Research</td>
+        <td class="mono small">google-research</td>
+        <td><span class="pill pill-published">ok</span></td>
+        <td>last item this run</td>
+      </tr>
+      <tr class="s-ok">
+        <td>Hugging Face</td>
+        <td class="mono small">huggingface</td>
+        <td><span class="pill pill-published">ok</span></td>
+        <td>last item this run</td>
+      </tr>
+      <tr class="s-ok">
+        <td>IEEE Spectrum</td>
+        <td class="mono small">ieee-spectrum-ai</td>
+        <td><span class="pill pill-published">ok</span></td>
+        <td>last item this run</td>
+      </tr>
+      <tr class="s-ok">
+        <td>Import AI</td>
+        <td class="mono small">import-ai</td>
+        <td><span class="pill pill-published">ok</span></td>
+        <td>last item this run</td>
+      </tr>
+      <tr class="s-ok">
+        <td>Meta</td>
+        <td class="mono small">meta-newsroom</td>
+        <td><span class="pill pill-published">ok</span></td>
+        <td>last item this run</td>
+      </tr>
+      <tr class="s-ok">
+        <td>Microsoft</td>
+        <td class="mono small">microsoft-source</td>
+        <td><span class="pill pill-published">ok</span></td>
+        <td>last item this run</td>
+      </tr>
+      <tr class="s-ok">
+        <td>Mistral AI</td>
+        <td class="mono small">mistral</td>
+        <td><span class="pill pill-published">ok</span></td>
+        <td>last item this run</td>
+      </tr>
+      <tr class="s-ok">
+        <td>MIT Technology Review</td>
+        <td class="mono small">mit-tech-review-ai</td>
+        <td><span class="pill pill-published">ok</span></td>
+        <td>last item this run</td>
+      </tr>
+      <tr class="s-ok">
+        <td>NVIDIA</td>
+        <td class="mono small">nvidia</td>
+        <td><span class="pill pill-published">ok</span></td>
+        <td>last item this run</td>
+      </tr>
+      <tr class="s-ok">
+        <td>Ollama</td>
+        <td class="mono small">ollama</td>
+        <td><span class="pill pill-published">ok</span></td>
+        <td>has never produced a usable item</td>
+      </tr>
+      <tr class="s-ok">
+        <td>OpenAI</td>
+        <td class="mono small">openai</td>
+        <td><span class="pill pill-published">ok</span></td>
+        <td>last item this run</td>
+      </tr>
+      <tr class="s-ok">
+        <td>Replicate</td>
+        <td class="mono small">replicate</td>
+        <td><span class="pill pill-published">ok</span></td>
+        <td>has never produced a usable item</td>
+      </tr>
+      <tr class="s-ok">
+        <td>SemiAnalysis</td>
+        <td class="mono small">semianalysis</td>
+        <td><span class="pill pill-published">ok</span></td>
+        <td>has never produced a usable item</td>
+      </tr>
+      <tr class="s-ok">
+        <td>Simon Willison&#39;s Weblog</td>
+        <td class="mono small">simon-willison</td>
+        <td><span class="pill pill-published">ok</span></td>
+        <td>last item this run</td>
+      </tr>
+      <tr class="s-ok">
+        <td>TechCrunch</td>
+        <td class="mono small">techcrunch-ai</td>
+        <td><span class="pill pill-published">ok</span></td>
+        <td>last item this run</td>
+      </tr>
+      <tr class="s-ok">
+        <td>The GitHub Blog</td>
+        <td class="mono small">github-ai</td>
+        <td><span class="pill pill-published">ok</span></td>
+        <td>last item this run</td>
+      </tr>
+      <tr class="s-ok">
+        <td>The Verge</td>
+        <td class="mono small">the-verge-ai</td>
+        <td><span class="pill pill-published">ok</span></td>
+        <td>last item this run</td>
+      </tr>
+      <tr class="s-ok">
+        <td>Together AI</td>
+        <td class="mono small">together-ai</td>
+        <td><span class="pill pill-published">ok</span></td>
+        <td>last item this run</td>
+      </tr>
+      <tr class="s-ok">
+        <td>VentureBeat</td>
+        <td class="mono small">venturebeat-ai</td>
+        <td><span class="pill pill-published">ok</span></td>
+        <td>last item this run</td>
+      </tr>
+      <tr class="s-ok">
+        <td>WIRED</td>
+        <td class="mono small">wired-ai</td>
+        <td><span class="pill pill-published">ok</span></td>
+        <td>last item this run</td>
+      </tr>
+      <tr class="s-ok">
+        <td>ZDNET</td>
+        <td class="mono small">zdnet-ai</td>
+        <td><span class="pill pill-published">ok</span></td>
+        <td>last item this run</td>
+      </tr>
+      </tbody>
+    </table>
+
+
+
+  <footer>
+    <p><a href="./">← back to the digest</a></p>
+  </footer>
+</div>
+</body>
+</html>
