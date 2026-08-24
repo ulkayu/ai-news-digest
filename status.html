@@ -71,7 +71,7 @@ a { color: var(--accent); }
   <header>
     <h1>Status</h1>
     <p class="state state-current">Current</p>
-    <p class="sub">Computed Aug 24, 19:03 Europe/Warsaw. Publishes at 11:00 and 15:00; this file is rewritten by every publish attempt.</p>
+    <p class="sub">Computed Aug 24, 19:22 Europe/Warsaw. Publishes at 11:00 and 15:00; this file is rewritten by every publish attempt.</p>
     <dl class="cards">
       <div class="card"><dt>Live digest</dt><dd>15:00 <span class="unit">2026-08-24-1500</span></dd></div>
       <div class="card"><dt>Items</dt><dd>10</dd></div>
@@ -89,6 +89,14 @@ a { color: var(--accent); }
   <table>
     <thead><tr><th>slot</th><th>outcome</th><th>started</th><th class="num">took</th><th>stages</th><th>detail</th></tr></thead>
     <tbody>
+      <tr class="o-published">
+        <td class="mono">2026-08-24-1500</td>
+        <td><span class="pill pill-published">published</span></td>
+        <td class="mono">Aug 24, 19:22</td>
+        <td class="mono num">4s</td>
+        <td class="mono small">ingest → digest</td>
+        <td>10 items <span class="tag">repeat</span></td>
+      </tr>
       <tr class="o-published">
         <td class="mono">2026-08-24-1500</td>
         <td><span class="pill pill-published">published</span></td>
@@ -192,14 +200,6 @@ a { color: var(--accent); }
         <td class="mono num">30s</td>
         <td class="mono small">ingest → digest → build → deploy</td>
         <td>10 items <span class="tag">repeat</span></td>
-      </tr>
-      <tr class="o-skipped">
-        <td class="mono">2026-08-24-1500</td>
-        <td><span class="pill pill-skipped">stood down</span></td>
-        <td class="mono">Aug 24, 17:04</td>
-        <td class="mono num">0s</td>
-        <td class="mono small">—</td>
-        <td>another publish is already running: pid 19337 has been publishing 2026-08-24-0500 for 0s <span class="tag">repeat</span></td>
       </tr>
     </tbody>
   </table>
