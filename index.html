@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AI News Digest — updated Mon, Aug 24, 2026 at 17:39 GMT+2</title>
+<title>AI News Digest — updated Mon, Aug 24, 2026 at 17:54 GMT+2</title>
 <meta name="description" content="The top 10 AI stories, tools and model releases. Refreshed twice a day.">
 <meta name="color-scheme" content="light dark">
-<meta name="ai-news-freshness" content="2026-08-24-1500|published|current|0|2026-08-24T15:39:36Z">
+<meta name="ai-news-freshness" content="2026-08-24-1500|published|current|0|2026-08-24T15:54:56Z">
 
 <style>
 :root {
@@ -126,6 +126,40 @@ h1 {
 .refresh-status:empty { display: none; }
 .refresh-bad { color: var(--stale-ink); }
 
+/* The answer to the press. The status span next to the button carries the
+   in-flight chatter ("Fetching the sources…"); the outcome gets a banner of its
+   own, because "the digest was updated, at this time, and here is what changed"
+   is the whole point of the button and must not read as a footnote. It survives
+   the reload that brings the new digest in — see reloadWith()/drain(). */
+.refresh-result {
+  margin: 0.85rem 0 0;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--line);
+  border-left-width: 3px;
+  border-left-color: var(--accent);
+  border-radius: 8px;
+  background: var(--surface);
+}
+.refresh-result[hidden] { display: none; }
+.refresh-result-head {
+  margin: 0;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--accent);
+}
+.refresh-result-body { margin: 0.25rem 0 0; font-size: 0.8125rem; line-height: 1.5; color: var(--ink-soft); }
+.refresh-result-warn { border-color: var(--warn-line); background: var(--warn-bg); }
+.refresh-result-warn .refresh-result-head { color: var(--warn-ink); }
+.refresh-result-warn .refresh-result-body { color: var(--warn-ink); }
+.refresh-result-bad { border-color: var(--stale-line); background: var(--stale-bg); }
+.refresh-result-bad .refresh-result-head { color: var(--stale-ink); }
+.refresh-result-bad .refresh-result-body { color: var(--stale-ink); }
+@media (prefers-reduced-motion: no-preference) {
+  .refresh-result { animation: refresh-in 0.32s ease-out both; }
+}
+@keyframes refresh-in { from { opacity: 0; transform: translateY(-0.35rem); } to { opacity: 1; transform: none; } }
+
 /* The freshness notice. Deliberately at the top, before the stories: a reader
    who does not scroll still learns that what follows may not be current. */
 .notice {
@@ -155,6 +189,25 @@ ol.items { list-style: none; margin: 0; padding: 0; }
   border-bottom: 1px solid var(--line);
 }
 .item:last-child { border-bottom: 0; }
+/* Set by the refresh script on any story that was not in the list before the
+   press. Nothing renders it at build time — a badge that is always there tells
+   a reader nothing. */
+.item[data-new] .title::after {
+  content: "New";
+  display: inline-block;
+  margin-left: 0.4rem;
+  transform: translateY(-0.1em);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--bg);
+  background: var(--accent);
+  border-radius: 999px;
+  padding: 0.1rem 0.4rem;
+  vertical-align: middle;
+}
+.item[data-new] .rank { color: var(--accent); }
 .rank {
   font-variant-numeric: tabular-nums;
   font-size: 0.875rem;
@@ -263,13 +316,13 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
     <p class="tagline">The top 10 AI stories, tools and model releases. Refreshed twice a day.</p>
     <p class="updated"
        data-freshness
-       data-generated-at="2026-08-24T15:39:36Z"
+       data-generated-at="2026-08-24T15:54:56Z"
        data-slot="15:00"
        data-overdue="0"
        data-boundaries="2026-08-25T03:00:00.000Z,2026-08-25T13:00:00.000Z,2026-08-26T03:00:00.000Z,2026-08-26T13:00:00.000Z,2026-08-27T03:00:00.000Z,2026-08-27T13:00:00.000Z,2026-08-28T03:00:00.000Z,2026-08-28T13:00:00.000Z,2026-08-29T03:00:00.000Z,2026-08-29T13:00:00.000Z,2026-08-30T03:00:00.000Z,2026-08-30T13:00:00.000Z,2026-08-31T03:00:00.000Z,2026-08-31T13:00:00.000Z,2026-09-01T03:00:00.000Z,2026-09-01T13:00:00.000Z"
        data-timezone="Europe/Warsaw">
       <span class="label">Last updated</span>
-      <time datetime="2026-08-24T15:39:36Z">Mon, Aug 24, 2026 at 17:39 GMT+2</time>
+      <time datetime="2026-08-24T15:54:56Z">Mon, Aug 24, 2026 at 17:54 GMT+2</time>
       <span class="slot">(15:00 run)</span>
       <span class="age" data-age></span>
     </p>
@@ -280,13 +333,14 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
       </button>
       <span class="refresh-status" data-refresh-status role="status" aria-live="polite"></span>
     </div>
+    <div class="refresh-result" data-refresh-result role="status" aria-live="polite" hidden></div>
   </header>
     <div class="notice" data-notice hidden></div>
   <div class="layout">
     <main>
       <h2 class="col-title">The stories</h2>
       <ol class="items">
-      <li class="item">
+      <li class="item" data-item-id="e7e2d0be34e4809d">
         <span class="rank" aria-hidden="true">1</span>
         <div class="body">
           <h3 class="title"><a href="https://blogs.nvidia.com/blog/vera-rubin-nvl72-efficiency-ai-agents" rel="noopener noreferrer">Up to 30x More Work Per Watt: NVIDIA Vera Rubin NVL72 Sets a New Efficiency Standard for AI Agents</a></h3>
@@ -301,7 +355,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
           <ul class="tags"><li class="tag">news</li><li class="tag">vendor</li></ul>
         </div>
       </li>
-      <li class="item">
+      <li class="item" data-item-id="19af374b78b369cd">
         <span class="rank" aria-hidden="true">2</span>
         <div class="body">
           <h3 class="title"><a href="https://blogs.nvidia.com/blog/vera-rubin-lpx-spectrum-x-nvlink-fusion" rel="noopener noreferrer">With Groq 3 LPX in Full Production, NVIDIA Extends Vera Rubin Inference for Agents</a></h3>
@@ -316,7 +370,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
           <ul class="tags"><li class="tag">news</li><li class="tag">vendor</li></ul>
         </div>
       </li>
-      <li class="item">
+      <li class="item" data-item-id="299f42df9591c973">
         <span class="rank" aria-hidden="true">3</span>
         <div class="body">
           <h3 class="title"><a href="https://techcrunch.com/2026/08/24/valor-point72-back-general-intuition-at-6b-valuation-as-ai-startup-pushes-into-robotics" rel="noopener noreferrer">Valor, Point72 back General Intuition at $6B valuation as AI startup pushes into robotics</a></h3>
@@ -331,8 +385,23 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
           <ul class="tags"><li class="tag">business</li></ul>
         </div>
       </li>
-      <li class="item">
+      <li class="item" data-item-id="9c61a4b87029f19d">
         <span class="rank" aria-hidden="true">4</span>
+        <div class="body">
+          <h3 class="title"><a href="https://aws.amazon.com/blogs/machine-learning/ai-powered-metadata-correction-and-harmonization" rel="noopener noreferrer">AI-powered metadata correction and harmonization</a></h3>
+          <p class="byline">
+            <span class="source">AWS Machine Learning</span>
+            <span class="sep" aria-hidden="true">·</span>
+            <time datetime="2026-08-24T15:53:03Z">Aug 24</time>
+            <span class="sep" aria-hidden="true">·</span>
+            <span class="host">aws.amazon.com</span>
+          </p>
+          <p class="summary">Metadata harmonization (standardizing labels, identifiers, and formats so datasets can work together) is still largely manual.</p>
+          <ul class="tags"><li class="tag">news</li><li class="tag">vendor</li></ul>
+        </div>
+      </li>
+      <li class="item" data-item-id="5824f00857c85b7c">
+        <span class="rank" aria-hidden="true">5</span>
         <div class="body">
           <h3 class="title"><a href="https://techcrunch.com/2026/08/24/openai-is-building-an-ai-agent-for-everything-will-everyone-use-them" rel="noopener noreferrer">OpenAI is building AI agents for everything. Will everyone use them?</a></h3>
           <p class="byline">
@@ -346,8 +415,8 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
           <ul class="tags"><li class="tag">opinion</li></ul>
         </div>
       </li>
-      <li class="item">
-        <span class="rank" aria-hidden="true">5</span>
+      <li class="item" data-item-id="3005a89b886153bc">
+        <span class="rank" aria-hidden="true">6</span>
         <div class="body">
           <h3 class="title"><a href="https://wired.com/story/teachers-deepfake-ai-students-content" rel="noopener noreferrer">They Dedicated Their Lives to Teaching. Then the Deepfakes Started</a></h3>
           <p class="byline">
@@ -361,8 +430,8 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
           <ul class="tags"><li class="tag">news</li></ul>
         </div>
       </li>
-      <li class="item">
-        <span class="rank" aria-hidden="true">6</span>
+      <li class="item" data-item-id="8abc3244a14ba63a">
+        <span class="rank" aria-hidden="true">7</span>
         <div class="body">
           <h3 class="title"><a href="https://importai.substack.com/p/import-ai-470-no-rights-for-machines" rel="noopener noreferrer">Import AI 470: No rights for machines; automating environment generation with SPADE; and building better GPU kernels with Hawkeye</a></h3>
           <p class="byline">
@@ -376,8 +445,8 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
           <ul class="tags"><li class="tag">analysis</li></ul>
         </div>
       </li>
-      <li class="item">
-        <span class="rank" aria-hidden="true">7</span>
+      <li class="item" data-item-id="a8178fe379e45035">
+        <span class="rank" aria-hidden="true">8</span>
         <div class="body">
           <h3 class="title"><a href="https://technologyreview.com/2026/08/24/1141740/kids-machines-language-learning" rel="noopener noreferrer">Kids outlearn AI—and we still don’t know why</a></h3>
           <p class="byline">
@@ -391,8 +460,8 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
           <ul class="tags"><li class="tag">news</li></ul>
         </div>
       </li>
-      <li class="item">
-        <span class="rank" aria-hidden="true">8</span>
+      <li class="item" data-item-id="744cea1aaad907f3">
+        <span class="rank" aria-hidden="true">9</span>
         <div class="body">
           <h3 class="title"><a href="https://zdnet.com/article/googlebook-laptop-is-almost-here-can-it-avoid-copilot-pc-problem" rel="noopener noreferrer">Google&#39;s AI-first Googlebook laptop is almost here - can it avoid the Copilot+ PC problem?</a></h3>
           <p class="byline">
@@ -406,8 +475,8 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
           <ul class="tags"><li class="tag">opinion</li></ul>
         </div>
       </li>
-      <li class="item">
-        <span class="rank" aria-hidden="true">9</span>
+      <li class="item" data-item-id="936271c9f394dd2d">
+        <span class="rank" aria-hidden="true">10</span>
         <div class="body">
           <h3 class="title"><a href="https://zdnet.com/article/how-to-use-chatgpt-work-and-my-top-tips" rel="noopener noreferrer">How to use ChatGPT Work - and my top 10 tips for getting started with agentic AI</a></h3>
           <p class="byline">
@@ -419,21 +488,6 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
           </p>
           <p class="summary">Curious about ChatGPT Work? Here&#39;s how the agentic AI handles research, files, and multistep projects, plus its risks and limits.</p>
           <ul class="tags"><li class="tag">service journalism</li></ul>
-        </div>
-      </li>
-      <li class="item">
-        <span class="rank" aria-hidden="true">10</span>
-        <div class="body">
-          <h3 class="title"><a href="https://arxiv.org/abs/2608.20342" rel="noopener noreferrer">PrimeAgentOrchestrator: Memory-Primed Agent Spawning for Personal AI Infrastructure</a></h3>
-          <p class="byline">
-            <span class="source">arXiv cs.AI</span>
-            <span class="sep" aria-hidden="true">·</span>
-            <time datetime="2026-08-24T04:00:00Z">Aug 24</time>
-            <span class="sep" aria-hidden="true">·</span>
-            <span class="host">arxiv.org</span>
-          </p>
-          <p class="summary">Large language model (LLM) coding agents start each session with an empty context window, discarding accumulated knowledge from prior work.</p>
-          <ul class="tags"><li class="tag">research</li></ul>
         </div>
       </li>
       </ol>
@@ -458,7 +512,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
           <p class="co-meta">
             <span class="co-src" title="Reported by another outlet, not announced by the company">via Simon Willison&#39;s Weblog</span>
             <span class="sep" aria-hidden="true">·</span>
-            <time datetime="2026-08-23T20:24:52Z" title="Aug 23">19h ago</time>
+            <time datetime="2026-08-23T20:24:52Z" title="Aug 23">20h ago</time>
             
           </p>
         </li>
@@ -504,11 +558,11 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
         </li>
         <li class="co">
           <p class="co-name"><a href="https://aws.amazon.com/ai/" rel="noopener noreferrer">Amazon</a><span class="co-kind">Platform</span></p>
-          <p class="co-title"><a href="https://aws.amazon.com/blogs/machine-learning/introducing-cross-region-inference-for-openai-gpt-5-6-models-on-amazon-bedrock" rel="noopener noreferrer">Introducing cross-Region inference for OpenAI GPT-5.6 models on Amazon Bedrock</a></p>
+          <p class="co-title"><a href="https://aws.amazon.com/blogs/machine-learning/ai-powered-metadata-correction-and-harmonization" rel="noopener noreferrer">AI-powered metadata correction and harmonization</a></p>
           <p class="co-meta">
             <span class="co-src" title="From the company itself">AWS Machine Learning</span>
             <span class="sep" aria-hidden="true">·</span>
-            <time datetime="2026-08-20T21:46:03Z" title="Aug 20">4 days ago</time>
+            <time datetime="2026-08-24T15:53:03Z" title="Aug 24">just now</time>
             
           </p>
         </li>
@@ -548,7 +602,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
   <footer>
     <p>10 items in this digest, 10 companies tracked. Published daily at 05:00 and 15:00 Europe/Warsaw.</p>
     <p class="src-health">29 of 30 sources OK</p>
-    <p>Selected 10 of 75 candidates from 201 items across 29 live sources; 2 near-duplicate(s) collapsed; rubric v1 (2026-08-24).</p>
+    <p>Selected 10 of 77 candidates from 202 items across 29 live sources; 2 near-duplicate(s) collapsed; rubric v1 (2026-08-24).</p>
     <p><a class="status-link" href="status.html">Run log and source health →</a></p>
   </footer>
 </div>
@@ -600,6 +654,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
   var btn = wrap.querySelector("[data-refresh-button]");
   var label = wrap.querySelector("[data-refresh-label]");
   var out = wrap.querySelector("[data-refresh-status]");
+  var banner = document.querySelector("[data-refresh-result]");
   var root = document.querySelector("[data-freshness]");
   if (!btn || !label || !out) return;
   wrap.hidden = false;
@@ -609,13 +664,112 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
   var here = (meta && meta.getAttribute("content")) ||
     (root && root.getAttribute("data-generated-at")) || "";
   var generatedHere = (root && root.getAttribute("data-generated-at")) || "";
+  var slotHere = (root && root.getAttribute("data-slot")) || "";
+  var tz = (root && root.getAttribute("data-timezone")) || "UTC";
+  var STASH = "ai-news-refresh";
   var mode = null;
   var timer = null;
   var polls = 0;
+  // Set once drain() has reported the press that brought this page in, so the
+  // load-time probe cannot talk over the answer the reader is reading.
+  var reported = false;
 
   function say(text, kind) {
     out.textContent = text;
     out.className = "refresh-status" + (kind ? " refresh-" + kind : "");
+  }
+
+  /** A wall-clock stamp in the digest's own timezone. No argument means now. */
+  function stamp(iso) {
+    var at = iso ? Date.parse(iso) : Date.now();
+    if (!at) at = Date.now();
+    try {
+      return new Intl.DateTimeFormat("en-GB", {
+        timeZone: tz, day: "numeric", month: "short",
+        hour: "2-digit", minute: "2-digit", hour12: false
+      }).format(new Date(at)) + " " + tz;
+    } catch (e) {
+      return new Date(at).toISOString().slice(0, 16).replace("T", " ") + " UTC";
+    }
+  }
+
+  /** The outcome of the press, said plainly and where it cannot be missed. */
+  function show(kind, head, body) {
+    if (!banner) { say(head + (body ? " " + body : ""), kind); return; }
+    banner.className = "refresh-result refresh-result-" + kind;
+    banner.textContent = "";
+    var h = document.createElement("p");
+    h.className = "refresh-result-head";
+    h.textContent = head;
+    banner.appendChild(h);
+    if (body) {
+      var b = document.createElement("p");
+      b.className = "refresh-result-body";
+      b.textContent = body;
+      banner.appendChild(b);
+    }
+    banner.hidden = false;
+  }
+
+  /** The ids of the stories on screen right now. */
+  function itemIds() {
+    var nodes = document.querySelectorAll("[data-item-id]");
+    var ids = [];
+    for (var i = 0; i < nodes.length; i += 1) ids.push(nodes[i].getAttribute("data-item-id"));
+    return ids;
+  }
+
+  /**
+   * Reload, carrying the press across it. Losing the message is survivable
+   * (private mode blocks sessionStorage) — losing the new digest is not, so the
+   * reload happens either way.
+   */
+  function reloadWith(reason) {
+    try {
+      sessionStorage.setItem(STASH, JSON.stringify({
+        reason: reason, at: Date.now(), was: generatedHere, ids: itemIds()
+      }));
+    } catch (e) { /* no stash; the new page will still be the new page */ }
+    location.reload();
+  }
+
+  /**
+   * The other half of reloadWith, run on load: report the new timestamp and
+   * diff the list against what the reader was looking at before the press.
+   */
+  function drain() {
+    var raw = null;
+    try {
+      raw = sessionStorage.getItem(STASH);
+      if (raw) sessionStorage.removeItem(STASH);
+    } catch (e) { return; }
+    if (!raw) return;
+    var p = null;
+    try { p = JSON.parse(raw); } catch (e) { return; }
+    // A stale stash belongs to an earlier visit, not to this page.
+    if (!p || !p.at || Date.now() - p.at > 300000) return;
+
+    var before = {};
+    var had = (p.ids || []).length;
+    for (var i = 0; i < had; i += 1) before[p.ids[i]] = true;
+
+    var nodes = document.querySelectorAll("[data-item-id]");
+    var fresh = 0;
+    for (var j = 0; j < nodes.length; j += 1) {
+      if (had && !before[nodes[j].getAttribute("data-item-id")]) {
+        nodes[j].setAttribute("data-new", "");
+        fresh += 1;
+      }
+    }
+
+    var count = nodes.length + (nodes.length === 1 ? " story" : " stories");
+    var body = fresh
+      ? count + " in the list — " + fresh + (fresh === 1 ? " is new" : " are new") +
+        " since you pressed the button, marked New below."
+      : count + " in the list. The sources were re-fetched and re-ranked; the same " +
+        "stories still lead, so nothing moved.";
+    show("ok", "Digest updated — " + stamp(generatedHere), body);
+    reported = true;
   }
   function busy(on, text) {
     btn.disabled = !!on;
@@ -649,10 +803,6 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
     }
     return null;
   }
-  function upToDate() {
-    var next = nextUpdate();
-    say("You have the latest digest." + (next ? " Next update " + next + "." : ""), "ok");
-  }
 
   // ── static page: ask the origin, not a server we do not have ──────
   function checkStatic() {
@@ -663,16 +813,22 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
       .then(function (html) {
         var there = markerOf(html);
         if (there && there !== here) {
-          say("A newer digest is live — loading it…", "ok");
-          location.reload();
+          say("A newer digest is live — loading it…");
+          reloadWith("static");
           return;
         }
         busy(false);
-        upToDate();
+        say("");
+        var next = nextUpdate();
+        show("ok", "Checked " + stamp(null) + " — you already have the latest digest",
+          "Nothing newer has been published since the " + (slotHere || "last") + " run at " +
+          stamp(generatedHere) + "." + (next ? " The next update lands " + next + "." : ""));
       })
       .catch(function (err) {
         busy(false);
-        say("Could not check just now — " + err.message + ".", "bad");
+        say("");
+        show("bad", "Could not check just now", err.message +
+          ". The digest below is untouched — try again in a moment.");
       });
   }
 
@@ -696,13 +852,32 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
     }
     stopPolling();
     busy(false);
-    if (state.state === "failed") { say(state.message, "bad"); return; }
-    if (state.job && state.job.generatedAt && state.job.generatedAt !== generatedHere) {
-      say("New digest — loading it…", "ok");
-      location.reload();
+    say("");
+    if (state.state === "failed") {
+      show("bad", "Refresh failed", state.message);
       return;
     }
-    say(state.message + (state.retryAfterSec ? " Try again in " + state.retryAfterSec + "s." : ""), "ok");
+    // The refresh produced a digest this page is not showing: reload into it and
+    // let drain() report what changed.
+    if (state.job && state.job.generatedAt && state.job.generatedAt !== generatedHere) {
+      say("New digest — loading it…");
+      reloadWith("live");
+      return;
+    }
+
+    var outcome = state.job ? state.job.outcome : null;
+    var again = state.retryAfterSec ? " Refresh again in " + state.retryAfterSec + "s." : "";
+    if (outcome === "held") {
+      show("ok", "Checked " + stamp(null) + " — nothing new to publish",
+        "The sources had nothing that beats what is already here, so the " +
+        (slotHere || "current") + " digest from " + stamp(generatedHere) + " stays live." + again);
+    } else if (outcome === "skipped") {
+      show("warn", "A scheduled update is already running",
+        "It has the lock, so this press stood down rather than publishing twice. " +
+        "Give it a moment and press Refresh again.");
+    } else {
+      show("ok", "Checked " + stamp(null), state.message + again);
+    }
   }
 
   function refreshLive() {
@@ -714,14 +889,21 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
       .catch(function (err) {
         stopPolling();
         busy(false);
-        say("Could not reach the refresh service — " + err.message + ".", "bad");
+        say("");
+        show("bad", "Could not reach the refresh service", err.message +
+          ". The digest below is untouched.");
       });
   }
 
   btn.addEventListener("click", function () {
     if (btn.disabled) return;
+    if (banner) banner.hidden = true;
     if (mode === "live") refreshLive(); else checkStatic();
   });
+
+  // Was the page we are on brought in by a press? Answer that before anything
+  // else — the reader is waiting on it.
+  drain();
 
   // Which of the two we are is a question about the page's host, so ask it once
   // on load rather than guessing — and stay usable either way if the probe
@@ -734,10 +916,12 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
       wrap.setAttribute("data-mode", "live");
       btn.title = "Fetch the sources and rebuild the digest now";
       // A refresh already in flight (or one that just finished) is news to a
-      // reader who has only just arrived.
+      // reader who has only just arrived — but not to the one whose own press
+      // put them here, who has already been told, in more detail than the
+      // endpoint can give.
       var fresh = state.job && state.job.finishedAt &&
         Date.now() - Date.parse(state.job.finishedAt) < 120000;
-      if (state.state === "running" || fresh) apply(state);
+      if (state.state === "running" || (fresh && !reported)) apply(state);
     })
     .catch(function () {
       mode = "static";
