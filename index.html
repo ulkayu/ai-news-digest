@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AI News Digest — updated Mon, Aug 24, 2026 at 18:04 GMT+2</title>
+<title>AI News Digest — updated Mon, Aug 24, 2026 at 18:11 GMT+2</title>
 <meta name="description" content="The top 10 AI stories, tools and model releases. Refreshed twice a day.">
 <meta name="color-scheme" content="light dark">
-<meta name="ai-news-freshness" content="2026-08-24-1500|published|current|0|2026-08-24T16:04:38Z">
+<meta name="ai-news-freshness" content="2026-08-24-1500|published|current|0|2026-08-24T16:11:22Z">
 
 <style>
 :root {
@@ -316,13 +316,13 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
     <p class="tagline">The top 10 AI stories, tools and model releases. Refreshed twice a day.</p>
     <p class="updated"
        data-freshness
-       data-generated-at="2026-08-24T16:04:38Z"
+       data-generated-at="2026-08-24T16:11:22Z"
        data-slot="15:00"
        data-overdue="0"
        data-boundaries="2026-08-25T03:00:00.000Z,2026-08-25T13:00:00.000Z,2026-08-26T03:00:00.000Z,2026-08-26T13:00:00.000Z,2026-08-27T03:00:00.000Z,2026-08-27T13:00:00.000Z,2026-08-28T03:00:00.000Z,2026-08-28T13:00:00.000Z,2026-08-29T03:00:00.000Z,2026-08-29T13:00:00.000Z,2026-08-30T03:00:00.000Z,2026-08-30T13:00:00.000Z,2026-08-31T03:00:00.000Z,2026-08-31T13:00:00.000Z,2026-09-01T03:00:00.000Z,2026-09-01T13:00:00.000Z"
        data-timezone="Europe/Warsaw">
       <span class="label">Last updated</span>
-      <time datetime="2026-08-24T16:04:38Z">Mon, Aug 24, 2026 at 18:04 GMT+2</time>
+      <time datetime="2026-08-24T16:11:22Z">Mon, Aug 24, 2026 at 18:11 GMT+2</time>
       <span class="slot">(15:00 run)</span>
       <span class="age" data-age></span>
     </p>
@@ -834,6 +834,16 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
 
   // ── live page: run the pipeline ────────────────────────────────────
   function apply(state) {
+    // The digest is on disk the moment ingest and ranking are done; the run is
+    // still "running" while it pushes to the static host, which the reader in
+    // front of this page is not waiting for. Go as soon as there is something
+    // to go to.
+    if (state && state.job && state.job.generatedAt && state.job.generatedAt !== generatedHere) {
+      stopPolling();
+      say("New digest — loading it…");
+      reloadWith("live");
+      return;
+    }
     if (!state || state.state === "running") {
       var secs = state && state.job ? Math.round((Date.now() - Date.parse(state.job.startedAt)) / 1000) : 0;
       busy(true, "Refreshing…");
@@ -857,14 +867,8 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
       show("bad", "Refresh failed", state.message);
       return;
     }
-    // The refresh produced a digest this page is not showing: reload into it and
-    // let drain() report what changed.
-    if (state.job && state.job.generatedAt && state.job.generatedAt !== generatedHere) {
-      say("New digest — loading it…");
-      reloadWith("live");
-      return;
-    }
-
+    // A digest this page is not showing was already handled above, so what is
+    // left is a run that changed nothing.
     var outcome = state.job ? state.job.outcome : null;
     var again = state.retryAfterSec ? " Refresh again in " + state.retryAfterSec + "s." : "";
     if (outcome === "held") {
@@ -919,9 +923,13 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
       // reader who has only just arrived — but not to the one whose own press
       // put them here, who has already been told, in more detail than the
       // endpoint can give.
+      //
+      // The same goes for a run still in flight: after a press the reader was
+      // reloaded into the new digest while the deploy finishes behind it, and
+      // narrating "refreshing…" over the banner would undo the answer.
       var fresh = state.job && state.job.finishedAt &&
         Date.now() - Date.parse(state.job.finishedAt) < 120000;
-      if (state.state === "running" || (fresh && !reported)) apply(state);
+      if (!reported && (state.state === "running" || fresh)) apply(state);
     })
     .catch(function () {
       mode = "static";
