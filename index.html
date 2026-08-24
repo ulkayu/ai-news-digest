@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AI News Digest — updated Mon, Aug 24, 2026 at 16:45 GMT+2</title>
+<title>AI News Digest — updated Mon, Aug 24, 2026 at 16:56 GMT+2</title>
 <meta name="description" content="The top 10 AI stories, tools and model releases. Refreshed twice a day.">
 <meta name="color-scheme" content="light dark">
 <style>
@@ -17,6 +17,7 @@
   --accent: #b4530a;
   --tag-bg: #f1efea;
   --max: 42rem;
+  --wide: 62rem;
 }
 @media (prefers-color-scheme: dark) {
   :root {
@@ -103,12 +104,71 @@ ul.tags { list-style: none; display: flex; flex-wrap: wrap; gap: 0.3rem; margin:
   border-radius: 999px;
   padding: 0.15rem 0.5rem;
 }
+.col-title, .panel-title {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin: 1.5rem 0 0.25rem;
+}
+main > .col-title { margin-top: 1.25rem; }
+
+/* The companies panel. On a phone it stacks under the stories, because the
+   stories are the product; from 64rem it sits beside them. */
+.panel { margin-top: 2.5rem; }
+.panel-sub { margin: 0 0 0.75rem; font-size: 0.8125rem; color: var(--ink-faint); }
+ol.cos { list-style: none; margin: 0; padding: 0; }
+.co { padding: 0.7rem 0; border-bottom: 1px solid var(--line); }
+.co:last-child { border-bottom: 0; }
+.co-name { margin: 0 0 0.15rem; display: flex; align-items: baseline; gap: 0.45rem; }
+.co-name a { color: var(--ink); text-decoration: none; font-size: 0.875rem; font-weight: 600; letter-spacing: -0.01em; }
+.co-name a:hover, .co-name a:focus-visible { color: var(--accent); }
+.co-kind {
+  font-size: 0.625rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  background: var(--tag-bg);
+  border-radius: 3px;
+  padding: 0.1rem 0.32rem;
+}
+.co-title { margin: 0 0 0.15rem; font-size: 0.875rem; line-height: 1.35; }
+.co-title a { color: var(--ink-soft); text-decoration: none; }
+.co-title a:hover, .co-title a:focus-visible { color: var(--accent); text-decoration: underline; }
+.co-meta { margin: 0; font-size: 0.75rem; color: var(--ink-faint); display: flex; flex-wrap: wrap; gap: 0.3rem; }
+.co-flag {
+  font-size: 0.625rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 0 0.3rem;
+}
+.co-stale .co-title a { color: var(--ink-faint); }
+.co-none { margin: 0; font-size: 0.8125rem; color: var(--ink-faint); font-style: italic; }
 footer { margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid var(--line); color: var(--ink-faint); font-size: 0.8125rem; }
 footer p { margin: 0 0 0.35rem; }
 a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
 @media (min-width: 40rem) {
   body { padding: 3rem 2rem 5rem; }
   .item { grid-template-columns: 2.25rem 1fr; gap: 1rem; }
+}
+@media (min-width: 64rem) {
+  .wrap { max-width: var(--wide); }
+  .layout { display: grid; grid-template-columns: minmax(0, 1fr) 18.5rem; gap: 3rem; align-items: start; }
+  .panel {
+    margin-top: 0;
+    position: sticky;
+    top: 2rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 1.1rem 1.25rem 1.25rem;
+  }
+  .panel-title { margin-top: 0; }
+  .co { padding: 0.62rem 0; }
 }
 </style>
 </head>
@@ -119,16 +179,18 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
     <p class="tagline">The top 10 AI stories, tools and model releases. Refreshed twice a day.</p>
     <p class="updated">
       <span class="label">Last updated</span>
-      <time datetime="2026-08-24T14:45:02Z">Mon, Aug 24, 2026 at 16:45 GMT+2</time>
+      <time datetime="2026-08-24T14:56:44Z">Mon, Aug 24, 2026 at 16:56 GMT+2</time>
       <span class="slot">(15:00 run)</span>
     </p>
   </header>
-  <main>
-    <ol class="items">
+  <div class="layout">
+    <main>
+      <h2 class="col-title">The stories</h2>
+      <ol class="items">
       <li class="item">
         <span class="rank" aria-hidden="true">1</span>
         <div class="body">
-          <h2 class="title"><a href="https://techcrunch.com/2026/08/24/hugging-face-reportedly-in-talks-to-be-acquired-for-13b" rel="noopener noreferrer">Hugging Face reportedly in talks to be acquired for $13B</a></h2>
+          <h3 class="title"><a href="https://techcrunch.com/2026/08/24/hugging-face-reportedly-in-talks-to-be-acquired-for-13b" rel="noopener noreferrer">Hugging Face reportedly in talks to be acquired for $13B</a></h3>
           <p class="byline">
             <span class="source">TechCrunch</span>
             <span class="sep" aria-hidden="true">·</span>
@@ -143,7 +205,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
       <li class="item">
         <span class="rank" aria-hidden="true">2</span>
         <div class="body">
-          <h2 class="title"><a href="https://wired.com/story/teachers-deepfake-ai-students-content" rel="noopener noreferrer">They Dedicated Their Lives to Teaching. Then the Deepfakes Started</a></h2>
+          <h3 class="title"><a href="https://wired.com/story/teachers-deepfake-ai-students-content" rel="noopener noreferrer">They Dedicated Their Lives to Teaching. Then the Deepfakes Started</a></h3>
           <p class="byline">
             <span class="source">WIRED</span>
             <span class="sep" aria-hidden="true">·</span>
@@ -158,7 +220,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
       <li class="item">
         <span class="rank" aria-hidden="true">3</span>
         <div class="body">
-          <h2 class="title"><a href="https://importai.substack.com/p/import-ai-470-no-rights-for-machines" rel="noopener noreferrer">Import AI 470: No rights for machines; automating environment generation with SPADE; and building better GPU kernels with Hawkeye</a></h2>
+          <h3 class="title"><a href="https://importai.substack.com/p/import-ai-470-no-rights-for-machines" rel="noopener noreferrer">Import AI 470: No rights for machines; automating environment generation with SPADE; and building better GPU kernels with Hawkeye</a></h3>
           <p class="byline">
             <span class="source">Import AI</span>
             <span class="sep" aria-hidden="true">·</span>
@@ -173,7 +235,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
       <li class="item">
         <span class="rank" aria-hidden="true">4</span>
         <div class="body">
-          <h2 class="title"><a href="https://technologyreview.com/2026/08/24/1141740/kids-machines-language-learning" rel="noopener noreferrer">Kids outlearn AI—and we still don’t know why</a></h2>
+          <h3 class="title"><a href="https://technologyreview.com/2026/08/24/1141740/kids-machines-language-learning" rel="noopener noreferrer">Kids outlearn AI—and we still don’t know why</a></h3>
           <p class="byline">
             <span class="source">MIT Technology Review</span>
             <span class="sep" aria-hidden="true">·</span>
@@ -188,7 +250,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
       <li class="item">
         <span class="rank" aria-hidden="true">5</span>
         <div class="body">
-          <h2 class="title"><a href="https://zdnet.com/article/googlebook-laptop-is-almost-here-can-it-avoid-copilot-pc-problem" rel="noopener noreferrer">Google&#39;s AI-first Googlebook laptop is almost here - can it avoid the Copilot+ PC problem?</a></h2>
+          <h3 class="title"><a href="https://zdnet.com/article/googlebook-laptop-is-almost-here-can-it-avoid-copilot-pc-problem" rel="noopener noreferrer">Google&#39;s AI-first Googlebook laptop is almost here - can it avoid the Copilot+ PC problem?</a></h3>
           <p class="byline">
             <span class="source">ZDNET</span>
             <span class="sep" aria-hidden="true">·</span>
@@ -203,7 +265,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
       <li class="item">
         <span class="rank" aria-hidden="true">6</span>
         <div class="body">
-          <h2 class="title"><a href="https://zdnet.com/article/how-to-use-chatgpt-work-and-my-top-tips" rel="noopener noreferrer">How to use ChatGPT Work - and my top 10 tips for getting started with agentic AI</a></h2>
+          <h3 class="title"><a href="https://zdnet.com/article/how-to-use-chatgpt-work-and-my-top-tips" rel="noopener noreferrer">How to use ChatGPT Work - and my top 10 tips for getting started with agentic AI</a></h3>
           <p class="byline">
             <span class="source">ZDNET</span>
             <span class="sep" aria-hidden="true">·</span>
@@ -218,7 +280,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
       <li class="item">
         <span class="rank" aria-hidden="true">7</span>
         <div class="body">
-          <h2 class="title"><a href="https://spectrum.ieee.org/adaptable-engineer-core-skills" rel="noopener noreferrer">What It Takes to Be an Adaptable Engineer</a></h2>
+          <h3 class="title"><a href="https://spectrum.ieee.org/adaptable-engineer-core-skills" rel="noopener noreferrer">What It Takes to Be an Adaptable Engineer</a></h3>
           <p class="byline">
             <span class="source">IEEE Spectrum</span>
             <span class="sep" aria-hidden="true">·</span>
@@ -233,7 +295,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
       <li class="item">
         <span class="rank" aria-hidden="true">8</span>
         <div class="body">
-          <h2 class="title"><a href="https://techcrunch.com/2026/08/22/inherent-founded-by-deepmind-alumni-says-its-ai-teammate-just-outperformed-anthropic-and-openai-at-replicating-research" rel="noopener noreferrer">Inherent, founded by DeepMind alumni, says its AI ‘teammate’ just outperformed Anthropic and OpenAI at replicating research</a></h2>
+          <h3 class="title"><a href="https://techcrunch.com/2026/08/22/inherent-founded-by-deepmind-alumni-says-its-ai-teammate-just-outperformed-anthropic-and-openai-at-replicating-research" rel="noopener noreferrer">Inherent, founded by DeepMind alumni, says its AI ‘teammate’ just outperformed Anthropic and OpenAI at replicating research</a></h3>
           <p class="byline">
             <span class="source">TechCrunch</span>
             <span class="sep" aria-hidden="true">·</span>
@@ -248,7 +310,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
       <li class="item">
         <span class="rank" aria-hidden="true">9</span>
         <div class="body">
-          <h2 class="title"><a href="https://arxiv.org/abs/2608.20342" rel="noopener noreferrer">PrimeAgentOrchestrator: Memory-Primed Agent Spawning for Personal AI Infrastructure</a></h2>
+          <h3 class="title"><a href="https://arxiv.org/abs/2608.20342" rel="noopener noreferrer">PrimeAgentOrchestrator: Memory-Primed Agent Spawning for Personal AI Infrastructure</a></h3>
           <p class="byline">
             <span class="source">arXiv cs.AI</span>
             <span class="sep" aria-hidden="true">·</span>
@@ -263,7 +325,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
       <li class="item">
         <span class="rank" aria-hidden="true">10</span>
         <div class="body">
-          <h2 class="title"><a href="https://arxiv.org/abs/2608.20549" rel="noopener noreferrer">Volumetric Radiology AI in the Era of Multimodal Large Language Models</a></h2>
+          <h3 class="title"><a href="https://arxiv.org/abs/2608.20549" rel="noopener noreferrer">Volumetric Radiology AI in the Era of Multimodal Large Language Models</a></h3>
           <p class="byline">
             <span class="source">arXiv cs.AI</span>
             <span class="sep" aria-hidden="true">·</span>
@@ -275,11 +337,118 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
           <ul class="tags"><li class="tag">research</li></ul>
         </div>
       </li>
-    </ol>
-  </main>
+      </ol>
+    </main>
+    <aside class="panel" aria-labelledby="companies-heading">
+      <h2 class="panel-title" id="companies-heading">The companies</h2>
+      <p class="panel-sub">10 AI labs and platforms we track, and the last thing we saw from each.</p>
+      <ol class="cos">
+        <li class="co">
+          <p class="co-name"><a href="https://openai.com/news/" rel="noopener noreferrer">OpenAI</a><span class="co-kind">Lab</span></p>
+          <p class="co-title"><a href="https://openai.com/index/introducing-ai-futures" rel="noopener noreferrer">Introducing AI Futures</a></p>
+          <p class="co-meta">
+            <span class="co-src" title="From the company itself">OpenAI</span>
+            <span class="sep" aria-hidden="true">·</span>
+            <time datetime="2026-08-20T07:00:00Z" title="Aug 20">4 days ago</time>
+            
+          </p>
+        </li>
+        <li class="co">
+          <p class="co-name"><a href="https://www.anthropic.com/news" rel="noopener noreferrer">Anthropic</a><span class="co-kind">Lab</span></p>
+          <p class="co-title"><a href="https://simonwillison.net/2026/Aug/23/anthropics-best-ai-model-struggles-to-attract-users-as-cheaper-t" rel="noopener noreferrer">Anthropic’s best AI model struggles to attract users as cheaper tools thrive</a></p>
+          <p class="co-meta">
+            <span class="co-src" title="Reported by another outlet, not announced by the company">via Simon Willison&#39;s Weblog</span>
+            <span class="sep" aria-hidden="true">·</span>
+            <time datetime="2026-08-23T20:24:52Z" title="Aug 23">19h ago</time>
+            
+          </p>
+        </li>
+        <li class="co">
+          <p class="co-name"><a href="https://deepmind.google/" rel="noopener noreferrer">Google DeepMind</a><span class="co-kind">Lab</span></p>
+          <p class="co-title"><a href="https://deepmind.google/blog/from-atari-to-eve-online-building-on-15-years-of-ai-research-in-games" rel="noopener noreferrer">From Atari to EVE Online: Building on 15 Years of AI Research in Games</a></p>
+          <p class="co-meta">
+            <span class="co-src" title="From the company itself">Google DeepMind</span>
+            <span class="sep" aria-hidden="true">·</span>
+            <time datetime="2026-08-21T11:59:48Z" title="Aug 21">3 days ago</time>
+            
+          </p>
+        </li>
+        <li class="co">
+          <p class="co-name"><a href="https://ai.meta.com/blog/" rel="noopener noreferrer">Meta</a><span class="co-kind">Lab</span></p>
+          <p class="co-title"><a href="https://arstechnica.com/tech-policy/2026/08/meta-ai-glasses-may-get-creepier-and-apps-that-detect-them-arent-perfect" rel="noopener noreferrer">As demand for Meta AI glasses explodes, it’s harder to avoid creepy recordings</a></p>
+          <p class="co-meta">
+            <span class="co-src" title="Reported by another outlet, not announced by the company">via Ars Technica</span>
+            <span class="sep" aria-hidden="true">·</span>
+            <time datetime="2026-08-21T11:00:53Z" title="Aug 21">3 days ago</time>
+            
+          </p>
+        </li>
+        <li class="co">
+          <p class="co-name"><a href="https://news.microsoft.com/source/topics/ai/" rel="noopener noreferrer">Microsoft</a><span class="co-kind">Platform</span></p>
+          <p class="co-title"><a href="https://microsoft.com/en-us/startups/blog/resolution-not-deflection-how-maven-uses-ai-agents-to-transform-the-enterprise-customer-journey" rel="noopener noreferrer">How one startup is using AI to improve customer service</a></p>
+          <p class="co-meta">
+            <span class="co-src" title="From the company itself">Microsoft</span>
+            <span class="sep" aria-hidden="true">·</span>
+            <time datetime="2026-08-20T15:32:55Z" title="Aug 20">4 days ago</time>
+            
+          </p>
+        </li>
+        <li class="co">
+          <p class="co-name"><a href="https://blogs.nvidia.com/" rel="noopener noreferrer">NVIDIA</a><span class="co-kind">Platform</span></p>
+          <p class="co-title"><a href="https://techcrunch.com/2026/08/21/nvidia-partners-with-data-center-developer-cloverleaf" rel="noopener noreferrer">Nvidia partners with data center developer Cloverleaf</a></p>
+          <p class="co-meta">
+            <span class="co-src" title="Reported by another outlet, not announced by the company">via TechCrunch</span>
+            <span class="sep" aria-hidden="true">·</span>
+            <time datetime="2026-08-21T22:37:38Z" title="Aug 22">3 days ago</time>
+            
+          </p>
+        </li>
+        <li class="co">
+          <p class="co-name"><a href="https://aws.amazon.com/ai/" rel="noopener noreferrer">Amazon</a><span class="co-kind">Platform</span></p>
+          <p class="co-title"><a href="https://aws.amazon.com/blogs/machine-learning/introducing-cross-region-inference-for-openai-gpt-5-6-models-on-amazon-bedrock" rel="noopener noreferrer">Introducing cross-Region inference for OpenAI GPT-5.6 models on Amazon Bedrock</a></p>
+          <p class="co-meta">
+            <span class="co-src" title="From the company itself">AWS Machine Learning</span>
+            <span class="sep" aria-hidden="true">·</span>
+            <time datetime="2026-08-20T21:46:03Z" title="Aug 20">4 days ago</time>
+            
+          </p>
+        </li>
+        <li class="co co-stale">
+          <p class="co-name"><a href="https://mistral.ai/news" rel="noopener noreferrer">Mistral AI</a><span class="co-kind">Lab</span></p>
+          <p class="co-title"><a href="https://mistral.ai/news/shieldstral" rel="noopener noreferrer">Introducing Shieldstral.</a></p>
+          <p class="co-meta">
+            <span class="co-src" title="From the company itself">Mistral AI</span>
+            <span class="sep" aria-hidden="true">·</span>
+            <time datetime="2026-08-04T12:00:26Z" title="Aug 4">20 days ago</time>
+            <span class="co-flag">last known</span>
+          </p>
+        </li>
+        <li class="co">
+          <p class="co-name"><a href="https://x.ai/news" rel="noopener noreferrer">xAI</a><span class="co-kind">Lab</span></p>
+          <p class="co-title"><a href="https://arstechnica.com/security/2026/08/grok-exfiltrates-user-data-when-malicious-instructions-are-encrypted" rel="noopener noreferrer">Grok exfiltrates user data when malicious instructions are encrypted</a></p>
+          <p class="co-meta">
+            <span class="co-src" title="Reported by another outlet, not announced by the company">via Ars Technica</span>
+            <span class="sep" aria-hidden="true">·</span>
+            <time datetime="2026-08-20T13:00:35Z" title="Aug 20">4 days ago</time>
+            
+          </p>
+        </li>
+        <li class="co">
+          <p class="co-name"><a href="https://huggingface.co/blog" rel="noopener noreferrer">Hugging Face</a><span class="co-kind">Tools</span></p>
+          <p class="co-title"><a href="https://techcrunch.com/2026/08/24/hugging-face-reportedly-in-talks-to-be-acquired-for-13b" rel="noopener noreferrer">Hugging Face reportedly in talks to be acquired for $13B</a></p>
+          <p class="co-meta">
+            <span class="co-src" title="Reported by another outlet, not announced by the company">via TechCrunch</span>
+            <span class="sep" aria-hidden="true">·</span>
+            <time datetime="2026-08-24T13:47:26Z" title="Aug 24">1h ago</time>
+            
+          </p>
+        </li>
+      </ol>
+    </aside>
+  </div>
   <footer>
-    <p>10 items in this digest. Published daily at 05:00 and 15:00 Europe/Warsaw.</p>
-    <p>Selected 10 of 71 candidates from 198 items across 29 live sources; 2 near-duplicate(s) collapsed; rubric v1 (2026-08-24).</p>
+    <p>10 items in this digest, 10 companies tracked. Published daily at 05:00 and 15:00 Europe/Warsaw.</p>
+    <p>Selected 10 of 71 candidates from 198 items across 29 live sources; 2 near-duplicate(s) collapsed; rubric v1 (2026-08-24). 1 of 10 companies had no signal in this run and shows its last known item.</p>
   </footer>
 </div>
 </body>
