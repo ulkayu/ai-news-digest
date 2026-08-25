@@ -71,13 +71,13 @@ a { color: var(--accent); }
   <header>
     <h1>Status</h1>
     <p class="state state-current">Current</p>
-    <p class="sub">Computed Aug 25, 11:53 Europe/Warsaw. Publishes at 11:00 and 15:00; this file is rewritten by every publish attempt.</p>
+    <p class="sub">Computed Aug 25, 15:00 Europe/Warsaw. Publishes at 11:00 and 15:00; this file is rewritten by every publish attempt.</p>
     <dl class="cards">
-      <div class="card"><dt>Live digest</dt><dd>11:00 <span class="unit">2026-08-25-1100</span></dd></div>
+      <div class="card"><dt>Live digest</dt><dd>15:00 <span class="unit">2026-08-25-1500</span></dd></div>
       <div class="card"><dt>Items</dt><dd>10</dd></div>
       <div class="card"><dt>Age</dt><dd>0.0 <span class="unit">hours</span></dd></div>
       <div class="card"><dt>Slots behind</dt><dd>0</dd></div>
-      <div class="card"><dt>Sources OK</dt><dd>29 <span class="unit">of 30</span></dd></div>
+      <div class="card"><dt>Sources OK</dt><dd>30 <span class="unit">of 31</span></dd></div>
       <div class="card"><dt>Last attempt</dt><dd>published</dd></div>
     </dl>
   </header>
@@ -90,11 +90,19 @@ a { color: var(--accent); }
     <thead><tr><th>slot</th><th>outcome</th><th>started</th><th class="num">took</th><th>stages</th><th>detail</th></tr></thead>
     <tbody>
       <tr class="o-published">
+        <td class="mono">2026-08-25-1500</td>
+        <td><span class="pill pill-published">published</span></td>
+        <td class="mono">Aug 25, 15:00</td>
+        <td class="mono num">4s</td>
+        <td class="mono small">ingest → digest</td>
+        <td>10 items</td>
+      </tr>
+      <tr class="o-published">
         <td class="mono">2026-08-25-1100</td>
         <td><span class="pill pill-published">published</span></td>
         <td class="mono">Aug 25, 11:53</td>
-        <td class="mono num">3s</td>
-        <td class="mono small">ingest → digest</td>
+        <td class="mono num">29s</td>
+        <td class="mono small">ingest → digest → build → deploy</td>
         <td>10 items <span class="tag">repeat</span></td>
       </tr>
       <tr class="o-published">
@@ -193,14 +201,6 @@ a { color: var(--accent); }
         <td class="mono small">ingest → digest → build → deploy</td>
         <td>10 items <span class="tag">repeat</span></td>
       </tr>
-      <tr class="o-failed">
-        <td class="mono">2026-08-24-1500</td>
-        <td><span class="pill pill-failed">FAILED</span></td>
-        <td class="mono">Aug 24, 17:25</td>
-        <td class="mono num">0s</td>
-        <td class="mono small">ingest ✗ → build</td>
-        <td>only 0 source(s) succeeded, below --min-ok 1 — treating this run as failed <span class="tag">repeat</span></td>
-      </tr>
     </tbody>
   </table>
 
@@ -249,6 +249,12 @@ a { color: var(--accent); }
         <td class="mono small">cloudflare-ai</td>
         <td><span class="pill pill-published">ok</span></td>
         <td>has never produced a usable item</td>
+      </tr>
+      <tr class="s-ok">
+        <td>Engineering at Meta</td>
+        <td class="mono small">meta-engineering</td>
+        <td><span class="pill pill-published">ok</span></td>
+        <td>last item this run</td>
       </tr>
       <tr class="s-ok">
         <td>Google</td>
